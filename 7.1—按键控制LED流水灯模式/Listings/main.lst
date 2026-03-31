@@ -1,0 +1,64 @@
+C51 COMPILER V9.54   MAIN                                                                  01/24/2026 15:48:32 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: F:\keil\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main.ls
+                    -t) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          #include "Timer0.h"
+   3          //定时器初始化
+   4          //void Timer0_Init()
+   5          //{
+   6          //  //TMOD = 0x01;//0000 0001 T0定时器工作模式1  但也会影响T1定时器
+   7          //  TMOD &=0xF0; //把TMOD的低四位清零，高四位保持不变
+   8          //  TMOD |= 0x01;//把TMOD的最低位置一，高四位保持不变
+   9          //  TF0 = 0;
+  10          //  TR0 = 1;
+  11          //  TH0 = 64535/256;
+  12          //  TL0 = 64535%256;
+  13          //  ET0 = 1;
+  14          //  EA = 1;
+  15          //  PT0 = 0;
+  16          //}
+  17          
+  18          int main()
+  19          {
+  20   1        Timer0_Init();
+  21   1        while(1)
+  22   1        {
+  23   2          
+  24   2        }
+  25   1      }
+  26          
+  27          //中断函数
+  28          
+  29          void Timer0_Routine() interrupt 1
+  30          {
+  31   1        static unsigned int T0Count;//静态函数
+  32   1        TH0 = 64535/256;
+  33   1        TL0 = 64535%256;
+  34   1        T0Count++;
+  35   1        if(T0Count>=1000)
+  36   1        {
+  37   2          T0Count = 0;
+  38   2          P2_0 = ~P2_0;
+  39   2        }
+  40   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     45    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      2    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
